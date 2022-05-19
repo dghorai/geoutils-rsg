@@ -4,7 +4,7 @@ Created on Sun Apr 24 2022
 
 @author: Debabrata Ghorai, Ph.D.
 
-Closest point identification on a line from given point.
+Closest point extraction between point and line.
 """
 
 # %%
