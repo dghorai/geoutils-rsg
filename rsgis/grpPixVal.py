@@ -4,7 +4,7 @@ Created on Mon Mar 14 2016
 
 @author: Debabrata Ghorai, Ph.D.
 
-Group paster pixel values.
+Group raster pixel values.
 """
 
 import numpy
