@@ -2,4 +2,4 @@
 Geospatial utilities for Remote Sensing and GIS application
 
 # Description
-This repositary having several scripts written in Python language for Remote Sensing and GIS data analysis and workflow automation. I have writen this scripts during my Ph.D. work and several other geospatial reserach work.
+This repository has several scripts written in Python for Remote Sensing and GIS data analysis and workflow automation. I have written this script during my Ph.D. work and several other geospatial research activities.
