@@ -1,8 +1,4 @@
-"""
-@author   Debabrata Ghorai, Ph.D.
-@email:   ghoraideb@gmail.com
-"""
-
+# import modules
 import sys
 
 class VersionError(Exception):
