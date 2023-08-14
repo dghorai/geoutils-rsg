@@ -1,0 +1,2 @@
+- convert ipynb to py file in vscode: ctrl+shift+p --> type Export --> select Export to Python Script
+- project layouts: https://realpython.com/python-application-layouts/
