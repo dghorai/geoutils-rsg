@@ -1,8 +1,8 @@
 import os
 
-import rsgis.vector.point_to_square_polygon as grd
+import src.rsgis.vector.point_to_square_polygon as grd
 
-from rsgis.logger import logging, project_dir
+from src.logger import logging, project_dir
 
 
 def main():

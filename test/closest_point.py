@@ -1,8 +1,8 @@
 import os
 
-import rsgis.vector.find_nearest_point as fp
+import src.rsgis.vector.find_nearest_point as fp
 
-from rsgis.logger import logging, project_dir
+from src.logger import logging, project_dir
 
 
 def main():

@@ -1,9 +1,9 @@
 # import modules
 import os
 
-import rsgis.vector.line_geometry as pg
+import src.rsgis.vector.line_geometry as pg
 
-from rsgis.logger import logging, project_dir
+from src.logger import logging, project_dir
 
 
 def main():
@@ -15,4 +15,3 @@ def main():
     pg.CreateGroupID(infc, fieldname="GROUPID")
     # generate river line hydroid
     pg.GenerateHydroID(infc, groupid="GROUPID", outfield="HYDROID")
-    
