@@ -11,7 +11,7 @@ import numpy
 from osgeo import gdal, gdal_array
 
 
-def dn_to_radiance(input_image, output_folder, LMAX, LMIN, QCALMIN, QCALMAX, prefix="band"):
+def dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QCALMAX, prefix="band"):
     """
     Digital Number to Radiance Conversion.
     References:
@@ -37,7 +37,8 @@ def dn_to_radiance(input_image, output_folder, LMAX, LMIN, QCALMIN, QCALMAX, pre
     for i in inrasband:
         dnfile = fopen.GetRasterBand(i)
         dn = numpy.array(dnfile.ReadAsArray())
-        radiance = ((LMAX[i-1] - LMIN[i-1])/(QCALMAX - QCALMIN))*dn + LMIN[i-1]
+        radiance = ((lmax_list[i-1] - lmin_list[i-1]) /
+                    (QCALMAX - QCALMIN))*dn + lmin_list[i-1]
         # create output file with projection
         radresult = gdal_array.OpenArray(radiance)
         geo = radresult.SetGeoTransform(geotransform)
@@ -51,8 +52,8 @@ def dn_to_radiance(input_image, output_folder, LMAX, LMIN, QCALMIN, QCALMAX, pre
 # if __name__ == "__main__":
 #     input_image = r"E:\Test\sample_landsat5_image.tif"
 #     output_folder = r"E:\Test"
-#     LMAX = [193.0, 365.0, 264.0, 221.0, 30.2, 16.5]
-#     LMIN = [-1.520, -2.840, -1.170, -1.510, -0.370, -0.150]
+#     lmax_list = [193.0, 365.0, 264.0, 221.0, 30.2, 16.5]
+#     lmin_list = [-1.520, -2.840, -1.170, -1.510, -0.370, -0.150]
 #     QCALMIN = 1
 #     QCALMAX = 255
-#     dn_to_radiance(input_image, output_folder, LMAX, LMIN, QCALMIN, QCALMAX)
+#     dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QCALMAX)
