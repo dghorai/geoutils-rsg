@@ -7,7 +7,7 @@ from src.rsgis.vector.wkt_ops import WktUtils
 
 def main():
     op = WktUtils()
-    inwkts = os.path.join(project_dir, "data", "sample_wkts.csv")
+    inwkts = os.path.join(project_dir, "artifacts", "data", "sample_wkts.csv")
     # get overlap area
     wkt_df = pd.read_csv(inwkts)
     poly_overlap_nodes = op.extract_overlap_polygon(

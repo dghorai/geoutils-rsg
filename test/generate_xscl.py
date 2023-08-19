@@ -6,7 +6,8 @@ from src.logger import logging, project_dir
 
 
 def main():
-    infc = os.path.join(project_dir, "data", "sample_drainage_lines.shp")
+    infc = os.path.join(project_dir, "artifacts", "data",
+                        "sample_drainage_lines.shp")
     # generate perpendicular line at specific interval
     outfc = os.path.join(project_dir, "test", "result",
                          "out_cross_section.shp")

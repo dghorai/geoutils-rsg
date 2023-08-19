@@ -8,7 +8,8 @@ from src.logger import logging, project_dir
 
 def main():
     # inputs
-    infc = os.path.join(project_dir, "data", "sample_drainage_lines.shp")
+    infc = os.path.join(project_dir, "artifacts", "data",
+                        "sample_drainage_lines.shp")
     # create line object id
     pg.CreateObjectID(infc, fieldname="OBJECTID")
     # create line-connected group id
