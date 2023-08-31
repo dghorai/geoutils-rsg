@@ -13,7 +13,7 @@ from operator import itemgetter
 
 from osgeo import ogr
 
-from src.rsgis.utils import CommonUtils
+from src.utils import CommonUtils
 
 comt = CommonUtils()
 

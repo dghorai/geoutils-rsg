@@ -10,7 +10,7 @@ Closest point extraction between point and line.
 # %%
 import sys
 
-from src.rsgis.utils import CommonUtils
+from src.utils import CommonUtils
 
 comt = CommonUtils()
 
