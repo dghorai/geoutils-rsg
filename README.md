@@ -1,6 +1,6 @@
-# rsgis-scripts
+# rsgis-toolbox
 
-Geospatial utilities for Remote Sensing and GIS application
+Geospatial utilities for Remote Sensing and GIS application.
 
 # Description
 
