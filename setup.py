@@ -1,12 +1,4 @@
-# import modules
-# import sys
 from setuptools import setup, find_packages
-
-# class VersionError(Exception):
-
-#     def __init__(self, *args, **kwargs):
-#         Exception.__init__(self, *args, **kwargs)
-#         return
 
 
 def readme():
