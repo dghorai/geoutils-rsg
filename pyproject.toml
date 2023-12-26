@@ -17,6 +17,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.urls]
 "Homepage" = "https://github.com/dghorai/rsgis-toolbox"
 "Bug Tracker" = "https://github.com/dghorai/rsgis-toolbox/issues"

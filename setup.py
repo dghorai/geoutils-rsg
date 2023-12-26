@@ -14,7 +14,8 @@ def get_requirements():
 setup(
     name='rsgis-toolbox',
     version='0.0.2',
-    packages=find_packages(),
+    package_dir={"": "src"},
+    packages=find_packages(where='src'),
     url='https://github.com/dghorai',
     license='MIT License',
     author='Debabrata Ghorai, Ph.D.',

@@ -1,8 +1,8 @@
 import os
 import pandas as pd
 
-from src.logger import logging, project_dir
-from src.rsgis.vector.wkt_ops import WktUtils
+from logger import logging, project_dir
+from rsgis.vector.wkt_ops import WktUtils
 
 
 def main():

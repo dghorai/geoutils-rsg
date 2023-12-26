@@ -1,8 +1,8 @@
 import os
 
-import src.rsgis.vector.create_crosssection_line as gm
+import vector.create_crosssection_line as gm
 
-from src.logger import logging, project_dir
+from logger import logging, project_dir
 
 
 def main():

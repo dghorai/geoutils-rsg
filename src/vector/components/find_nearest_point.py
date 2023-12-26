@@ -8,8 +8,8 @@ Closest point extraction between point and line.
 
 import sys
 
-from src.vector.utils import reading_polyline, intersect_point_to_line, dist_calc
-from src.vector.config_entity import PointConfig, PolylineConfig
+from vector.utils import reading_polyline, intersect_point_to_line, dist_calc
+from vector.config_entity import PointConfig, PolylineConfig
 
 
 class FindNearestPoint:

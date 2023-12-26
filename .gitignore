@@ -129,9 +129,8 @@ dmypy.json
 .pyre/
 
 # others
-logs
 .idea
-.vscode
+logs/*
 src/__pycache__
 src/raster/__pycache__
 src/raster/components/__pycache__

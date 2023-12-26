@@ -17,7 +17,7 @@ import subprocess
 
 from osgeo import gdal
 from osgeo.gdalconst import *
-from src.logger import project_dir
+from logger import project_dir
 
 
 class LargeGeoTiffMosaic:

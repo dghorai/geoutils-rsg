@@ -1,6 +1,6 @@
-from src.logger import logger
-from src.vector.config import ConfigManager
-from src.vector.components.create_crosssection_line import XSCL
+from logger import logger
+from vector.config import ConfigManager
+from vector.components.create_crosssection_line import XSCL
 
 STAGE_NAME = "Generate Cross-Section Cut-Line of a Line"
 

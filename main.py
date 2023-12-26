@@ -1,10 +1,18 @@
-from src.logger import logger
-from src.exception import error_handling
-from src.vector.pipeline.create_grid_pipeline import CreateGridPipeline
-from src.vector.pipeline.drainage_area_pipeline import DrainageAreaCalcPipeline
-from src.vector.pipeline.merge_vectorfile_pipeline import MergeVectorFilesPipeline
-from src.vector.pipeline.nearest_point_pipeline import FindNearestPointPipeline
-from src.vector.pipeline.xscl_pipeline import XSCLPipeline
+try:
+    import sys
+    sys.path.append('src')
+except:
+    pass
+
+from logger import logger
+from exception import error_handling
+
+from vector.pipeline.xscl_pipeline import XSCLPipeline
+from vector.pipeline.nearest_point_pipeline import FindNearestPointPipeline
+from vector.pipeline.merge_vectorfile_pipeline import MergeVectorFilesPipeline
+from vector.pipeline.drainage_area_pipeline import DrainageAreaCalcPipeline
+from vector.pipeline.create_grid_pipeline import CreateGridPipeline
+
 
 # Select a task number from STAGE_NAME_DICT
 task_id = 1

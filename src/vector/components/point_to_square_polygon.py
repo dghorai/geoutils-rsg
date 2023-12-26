@@ -9,9 +9,9 @@ Convert grid center points to square polygon/grid.
 
 import sys
 
-from src.logger import logger
+from logger import logger
 from osgeo import ogr
-from src.vector.config_entity import PointConfig, PolygonConfig
+from vector.config_entity import PointConfig, PolygonConfig
 
 
 class CreateGrid:

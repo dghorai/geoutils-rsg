@@ -4,7 +4,7 @@ import logging
 import datetime
 
 # create log folder and file
-project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+project_dir = os.path.dirname(os.path.abspath(__file__))
 log_dir = os.path.join(project_dir, "logs")
 log_file_name = f"{datetime.datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
 log_file = os.path.join(log_dir, log_file_name)

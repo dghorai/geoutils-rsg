@@ -1,7 +1,7 @@
 import os
 
-import src.rsgis.raster.clip_raster as clip
-from src.logger import logging, project_dir
+import raster.components.clip_raster as clip
+from logger import logging, project_dir
 
 
 def main():

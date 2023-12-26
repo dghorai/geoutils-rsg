@@ -10,8 +10,8 @@ Objective: Mosaic large GeoTiff files using GDAL and Python extension package wi
 import os
 import time
 
-from src.rsgis.raster.mosaic_large_geotiffs import LargeGeoTiffMosaic
-from src.logger import project_dir
+from raster.mosaic_large_geotiffs import LargeGeoTiffMosaic
+from logger import project_dir
 
 
 def main():

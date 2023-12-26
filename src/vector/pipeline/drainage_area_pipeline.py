@@ -1,6 +1,6 @@
-from src.logger import logger
-from src.vector.config import ConfigManager
-from src.vector.components.calculate_cumulative_drainage_area import DrainageAreaCalc
+from logger import logger
+from vector.config import ConfigManager
+from vector.components.calculate_cumulative_drainage_area import DrainageAreaCalc
 
 STAGE_NAME = "Drainage Area Calculation"
 

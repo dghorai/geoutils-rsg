@@ -12,10 +12,10 @@ import os
 import math
 
 from osgeo import ogr
-from src.logger import logger
+from logger import logger
 
-from src.vector.utils import fixed_interval_points
-from src.vector.config_entity import PolylineConfig
+from vector.utils import fixed_interval_points
+from vector.config_entity import PolylineConfig
 
 
 class XSCL:
