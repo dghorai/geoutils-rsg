@@ -14,12 +14,6 @@ from osgeo import gdal, gdal_array
 def dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QCALMAX, prefix="band"):
     """
     Digital Number to Radiance Conversion.
-    References:
-    (1) http://osgeo-org.1560.x6.nabble.com/satellite-image-processing-in-Python-td3753422.html
-    (2) http://lists.osgeo.org/pipermail/gdal-dev/2012-November/034549.html
-    (3) http://pcjericks.github.io/py-gdalogr-cookbook/raster_layers.html
-    (4) http://gis.stackexchange.com/questions/76919/is-it-possible-to-open-rasters-as-array-in-numpy-without-using-another-library
-    (5) http://scipy-lectures.github.io/advanced/image_processing/
     """
     # set output file projection from input file
     fopen = gdal.Open(input_image)

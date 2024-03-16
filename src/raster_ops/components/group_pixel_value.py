@@ -13,7 +13,6 @@ import numpy
 def group_raster_pixels(data):
     """
     Raster pixel clustering.
-    Reference: http://stackoverflow.com/questions/4842613/merge-lists-that-share-common-elements
     """
     # pixel to pixel connection list
     ftnode = list()

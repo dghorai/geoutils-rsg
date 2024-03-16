@@ -77,7 +77,6 @@ class LargeGeoTiffMosaic:
     def floatraster_to_intraster(self, tif_file_list, outf):
         """
         Convert float-type raster to integer-type raster.
-        Reference: https://gis.stackexchange.com/questions/250077/overlapping-rasters-as-numpy-arrays
         """
         cnt = 1
         new_file_list = list()

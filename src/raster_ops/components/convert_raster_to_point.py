@@ -56,9 +56,3 @@ def raster_to_point(raster_data, outpoint_file, outfield="DN"):
     # Flush
     shapeData.Destroy()
     return "Process Completed!"
-
-
-# if __name__ == "__main__":
-#     raster_data = r"G:\MyWorkingFolder\sample_image.img"
-#     outpoint_file = r"G:\MyWorkingFolder\point_shapefile.shp"
-#     raster_to_point(raster_data, outpoint_file)

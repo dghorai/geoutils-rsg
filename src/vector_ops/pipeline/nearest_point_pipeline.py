@@ -1,6 +1,6 @@
 from logger import logger
-from vector.config import ConfigManager
-from vector.components.find_nearest_point import FindNearestPoint
+from vector_ops.config import ConfigManager
+from vector_ops.components.find_nearest_point import FindNearestPoint
 
 
 STAGE_NAME = "Find Nearest Point between a Single Point and Line Network"

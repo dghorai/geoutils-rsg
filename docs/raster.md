@@ -1,7 +1,7 @@
 # Raster Tools:
 
-- Clip Raster
-- Convert Rater to Point
+- Clip Raster by Extent
+- Convert Rater Pixel to Point
 - Convert DN to Radiance
 - Export Individual LULC Class
 - Extract Border Pixel Values

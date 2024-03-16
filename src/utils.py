@@ -10,9 +10,11 @@ Common functions for geometry operation in GIS.
 import math
 import random
 
-from osgeo import ogr, osr
+
+from osgeo import ogr, osr, gdal, gdalconst
 from ensure import ensure_annotations
 from typing import Any
+from exception import CustomException
 
 
 @ensure_annotations
@@ -99,9 +101,9 @@ def reading_polyline(inshp, shptype='polyline', fieldname=None, isnode=False):
                     objects.append(objectid)
                     nodes.append(points)
         else:
-            raise Exception("File type other than polyline")
+            raise CustomException("File type other than polyline")
     else:
-        raise Exception("Invalid shapefile")
+        raise CustomException("Invalid shapefile")
 
     # return results
     if fieldname != None:
@@ -116,9 +118,6 @@ def reading_polyline(inshp, shptype='polyline', fieldname=None, isnode=False):
 def writting_polyline(xylists, outfile, inlayer='', epsgno=0):
     """
     Create new line shapefile.
-    Reference: 
-    (1) https://gis.stackexchange.com/questions/392515/create-a-shapefile-from-geometry-with-ogr
-    (2) https://www.gis.usu.edu/~chrisg/python/2009/lectures/ospy_slides2.pdf
     """
 
     # Set up the shapefile driver
@@ -139,7 +138,7 @@ def writting_polyline(xylists, outfile, inlayer='', epsgno=0):
         # create one layer
         layer = ds.CreateLayer("line", srs, ogr.wkbLineString)
     else:
-        raise Exception(
+        raise CustomException(
             "SpatialReference not define, pass inlayer or epsgno arguments to the function")
 
     # Add an ID field
@@ -251,117 +250,6 @@ def flip_line(layer):
     return rev_line_objid, rev_line_nodes
 
 
-def fixed_interval_points(infc, interval, flipline=False, save=False, outfc=None, lineslope=False):
-    """Generate fixed interval points along polyline.
-    Reference: 
-    (1) http://nodedangles.wordpress.com/2011/05/01/quick-dirty-arcpy-batch-splitting-polylines-to-a-specific-length/
-    (2) https://github.com/HeyHarry3636/CrossSections_python/blob/master/crossSections_05262016.py
-
-    """
-
-    def mid_point(p1, p2, l1, l2):
-        iX = p1[0]+((p2[0]-p1[0])*(l1/l2))
-        iY = p1[1]+((p2[1]-p1[1])*(l1/l2))
-        pts = [iX, iY]
-        return pts
-
-    # get nodes and objectids
-    if flipline == True:
-        openfile = ogr.Open(infc)
-        in_layer = openfile.GetLayer(0)
-        objects, nodes = flip_line(in_layer)
-    else:
-        objects, nodes = reading_polyline(infc)
-
-    # generate points
-    points = []
-    slopes = []
-    for n, i in zip(objects, nodes):
-        tDist = 0  # total distance
-        vPoint = None  # previous point
-        for pnt in i:
-            if not (vPoint is None):
-                thisDist = dist_calc(vPoint, pnt)
-                maxAddDist = interval - tDist
-                if (tDist+thisDist) > interval:
-                    pCnt = int((tDist+thisDist)/interval)
-                    for k in range(pCnt):
-                        maxAddDist = interval - tDist
-                        nPoint = mid_point(
-                            vPoint, pnt, maxAddDist, thisDist)
-                        slope = line_slope(vPoint, nPoint)
-                        points.append(nPoint+[n])
-                        slopes.append(slope)
-                        vPoint = nPoint
-                        thisDist = dist_calc(vPoint, pnt)
-                        tDist = 0
-                    tDist += thisDist
-                else:
-                    tDist += thisDist
-            else:
-                tDist = 0
-            vPoint = pnt
-
-    # save if needed
-    if save == True:
-        openfile = ogr.Open(infc)
-        in_layer = openfile.GetLayer(0)
-        srs = in_layer.GetSpatialRef()
-        driver = ogr.GetDriverByName('ESRI Shapefile')
-        shapeData = driver.CreateDataSource(outfc)
-        out_layer = shapeData.CreateLayer('point', srs, ogr.wkbPoint)
-
-        # create fileds
-        lineid = ogr.FieldDefn("LINEID", ogr.OFTInteger)
-        out_layer.CreateField(lineid)
-        pointid = ogr.FieldDefn("POINTID", ogr.OFTInteger)
-        out_layer.CreateField(pointid)
-        lyrDef = out_layer.GetLayerDefn()
-
-        # Create point
-        for n, p in enumerate(points):
-            pt = ogr.Geometry(ogr.wkbPoint)
-            pt.SetPoint(0, p[0], p[1])
-            feature = ogr.Feature(lyrDef)
-            feature.SetGeometry(pt)
-            feature.SetField("POINTID", n+1)
-            feature.SetField("LINEID", p[2])
-            out_layer.CreateFeature(feature)
-
-        # Flush
-        shapeData.Destroy()
-
-    # return points
-    if lineslope == True:
-        return points, slopes
-    else:
-        return points
-
-
-def intersect_point_to_line(point, line_start, line_end):
-    """
-    Find intersect point.
-    Source: https://gis.stackexchange.com/questions/396/nearest-neighbor-between-point-layer-and-line-layer
-    """
-
-    line_magnitude = dist_calc(line_end, line_start)
-    u = ((point[0]-line_start[0])*(line_end[0]-line_start[0])+(point[1] -
-         line_start[1])*(line_end[1]-line_start[1]))/(line_magnitude**2)
-
-    # Closest point does not fall within the line segment, take the shorter distance to an endpoint
-    if u < 0.00001 or u > 1:
-        ix = dist_calc(point, line_start)
-        iy = dist_calc(point, line_end)
-        if ix > iy:
-            return line_end
-        else:
-            return line_start
-    else:
-        ix = line_start[0]+u*(line_end[0]-line_start[0])
-        iy = line_start[1]+u*(line_end[1]-line_start[1])
-        return ix, iy
-
-
 def interval_points_straightline(p1, p2, interval=10):
     """Generate fixed interval points on straight line"""
 
@@ -434,28 +322,8 @@ def offset_random_point(lon, lat, offset=10, unit='km'):
     return x_random, y_random
 
 
-def bbox_intersect(lyr1Ext, lyr2Ext):
-    """
-    Bounding Box intersection test.
-    Source: https://gis.stackexchange.com/questions/57964/get-vector-features-inside-a-specific-extent
-    """
-
-    # lyr1Ext - reference layer
-    b1_x = lyr1Ext[0]
-    b1_y = lyr1Ext[2]
-    b1_w = lyr1Ext[1] - lyr1Ext[0]  # Horizontal length
-    b1_h = lyr1Ext[3] - lyr1Ext[2]  # Vertical length
-
-    # lyr2Ext - clip/intersect layer
-    b2_x = lyr2Ext[0]
-    b2_y = lyr2Ext[2]
-    b2_w = lyr2Ext[1] - lyr2Ext[0]  # horizontal length
-    b2_h = lyr2Ext[3] - lyr2Ext[2]  # vertical length
-
-    # query for select object which is inside of the reference extent
-    if (b1_x > b2_x + b2_w - 1) or (b1_y > b2_y + b2_h - 1) or (b2_x > b1_x + b1_w - 1) or (b2_y > b1_y + b1_h - 1):
-        res = False
-    else:
-        res = True
-
-    return res
+def read_raster_as_array(rasterfile):
+    imgDataSource = gdal.Open(rasterfile, gdalconst.GA_ReadOnly)
+    geoTransform = imgDataSource.GetGeoTransform()
+    rasterBands = imgDataSource.GetRasterBand()
+    return rasterBands, geoTransform

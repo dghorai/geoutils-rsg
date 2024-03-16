@@ -1,6 +1,6 @@
 from logger import logger
-from vector.config import ConfigManager
-from vector.components.merge_vector_files import MergeVectorFiles
+from vector_ops.config import ConfigManager
+from vector_ops.components.merge_vector_files import MergeVectorFiles
 
 
 STAGE_NAME = "Merge Vector Files"

@@ -14,8 +14,8 @@ import math
 from osgeo import ogr
 from logger import logger
 
-from vector.utils import fixed_interval_points
-from vector.config_entity import PolylineConfig
+from ref_scripts import fixed_interval_points
+from vector_ops.config_entity import PolylineConfig
 
 
 class XSCL:

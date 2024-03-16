@@ -11,7 +11,7 @@ import sys
 
 from logger import logger
 from osgeo import ogr
-from vector.config_entity import PointConfig, PolygonConfig
+from vector_ops.config_entity import PointConfig, PolygonConfig
 
 
 class CreateGrid:

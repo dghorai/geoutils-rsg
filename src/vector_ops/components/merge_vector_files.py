@@ -9,7 +9,7 @@ Merge vector files.
 import os
 
 from osgeo import ogr
-from vector.config_entity import VectordataConfig
+from vector_ops.config_entity import VectordataConfig
 
 
 class MergeVectorFiles:

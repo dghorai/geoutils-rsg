@@ -1,25 +1,26 @@
 from logger import logger
-from vector.config import ConfigManager
-from vector.components.create_crosssection_line import XSCL
+from vector_ops.config import ConfigManager
+from vector_ops.components.calculate_cumulative_drainage_area import DrainageAreaCalc
 
-STAGE_NAME = "Generate Cross-Section Cut-Line of a Line"
+STAGE_NAME = "Drainage Area Calculation"
 
 
-class XSCLPipeline:
+class DrainageAreaCalcPipeline:
     def __init__(self) -> None:
         pass
 
     def main(self):
         config = ConfigManager()
         plconfig = config.get_polyline_config()
-        obj = XSCL(plconfig=plconfig)
-        obj.create_xscl_uniqueid()
+        pgconfig = config.get_polygon_config()
+        obj = DrainageAreaCalc(plconfig=plconfig, pgconfig=pgconfig)
+        obj.cumulative_drainage_area()
 
 
 if __name__ == "__main__":
     try:
         logger.info(f">>>>> {STAGE_NAME} started <<<<<")
-        obj = XSCLPipeline()
+        obj = DrainageAreaCalcPipeline()
         obj.main()
         logger.info(f">>>>> {STAGE_NAME} completed <<<<<\n")
     except Exception as e:

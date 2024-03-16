@@ -1,6 +1,6 @@
 from logger import logger
-from vector.config import ConfigManager
-from vector.components.point_to_square_polygon import CreateGrid
+from vector_ops.config import ConfigManager
+from vector_ops.components.point_to_square_polygon import CreateGrid
 
 
 STAGE_NAME = "Generate Grid Polygon of a Point File"

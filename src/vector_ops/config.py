@@ -2,7 +2,7 @@ import os
 
 from pathlib import Path
 from consts import *
-from vector.config_entity import *
+from vector_ops.config_entity import *
 
 
 class ConfigManager:
