@@ -39,3 +39,29 @@ VECTOR_GEOMETRY_TYPE = 'Point'  # Point/Line/Polygon
 OUT_GRID_POLYGON_FILE = ''
 POINT_OFFSET_TO_GENERATE_GRID = 500
 POINT_FILE_COORDINATE_SYS = 'GCS'
+
+
+# tool: clip raster by extent
+RASTER_INPUT_FILE = ''
+CLIP_BOUNDARY_FILE = ''
+CLIP_RASTER_OUTPUT_FILE = ''
+
+# tool: convert raster pixel to points
+RASTER_INPUT_FILE = ''
+OUT_POINT_FILE = ''
+
+
+# tool: convert dn to radiance of satellite image bands
+RASTER_INPUT_FILE = ''
+RASTER_WORKING_DIR = ''
+BANDS_LMAX_VALUES = [193.0, 365.0, 264.0, 221.0, 30.2, 16.5]
+BANDS_LMIN_VALUES = [-1.520, -2.840, -1.170, -1.510, -0.370, -0.150]
+QCAL_MIN_VALUE = 1
+QCAL_MAX_VALUE = 255
+OUT_NAME_PREFIX = 'band_'
+
+
+# tool: export lulc individual class
+LULC_RASTER_FILE = ''
+LULC_OUT_CLASS_FILE = ''
+LULC_CLASS_CODE = 1

@@ -340,3 +340,4 @@ def extract_pixel_value(imgfile, point_list):
 # http://scipy-lectures.github.io/advanced/image_processing/
 # http://stackoverflow.com/questions/4842613/merge-lists-that-share-common-elements
 # https://gis.stackexchange.com/questions/250077/overlapping-rasters-as-numpy-arrays
+# gdal raster datatype: http://ikcest-drr.osgeo.cn/tutorial/k8023

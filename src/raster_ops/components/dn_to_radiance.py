@@ -16,12 +16,12 @@ def dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QC
     Digital Number to Radiance Conversion.
     """
     # set output file projection from input file
-    fopen = gdal.Open(input_image)
-    geotransform = fopen.GetGeoTransform()
-    prj = fopen.GetProjection()
+    ds = gdal.Open(input_image)
+    geotransform = ds.GetGeoTransform()
+    prj = ds.GetProjection()
 
     # get total input raster bands (count)
-    inrasband = [band+1 for band in range(fopen.RasterCount)]
+    inrasband = [band+1 for band in range(ds.RasterCount)]
 
     # set output file driver
     # HFA for *.img reading and writting
@@ -29,25 +29,17 @@ def dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QC
 
     # processing
     for i in inrasband:
-        dnfile = fopen.GetRasterBand(i)
+        dnfile = ds.GetRasterBand(i)
         dn = numpy.array(dnfile.ReadAsArray())
         radiance = ((lmax_list[i-1] - lmin_list[i-1]) /
                     (QCALMAX - QCALMIN))*dn + lmin_list[i-1]
         # create output file with projection
         radresult = gdal_array.OpenArray(radiance)
-        geo = radresult.SetGeoTransform(geotransform)
-        proj = radresult.SetProjection(prj)
+        radresult.SetGeoTransform(geotransform)
+        radresult.SetProjection(prj)
         # print ("Digital number to radiance conversion for band : %d" % i)
-        outputs = outdriver.CreateCopy(
-            output_folder+"\\"+prefix+"_"+str(i)+".img", radresult)
+        outdriver.CreateCopy(output_folder+"\\"+prefix +
+                             "_"+str(i)+".img", radresult)
+    outdriver = None
+    ds = None
     return
-
-
-# if __name__ == "__main__":
-#     input_image = r"E:\Test\sample_landsat5_image.tif"
-#     output_folder = r"E:\Test"
-#     lmax_list = [193.0, 365.0, 264.0, 221.0, 30.2, 16.5]
-#     lmin_list = [-1.520, -2.840, -1.170, -1.510, -0.370, -0.150]
-#     QCALMIN = 1
-#     QCALMAX = 255
-#     dn_to_radiance(input_image, output_folder, lmax_list, lmin_list, QCALMIN, QCALMAX)

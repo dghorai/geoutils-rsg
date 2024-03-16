@@ -7,9 +7,9 @@ Created on Sun Apr 24 2022
 Common functions for geometry operation in GIS.
 """
 
+import os
 import math
 import random
-
 
 from osgeo import ogr, osr, gdal, gdalconst
 from ensure import ensure_annotations
@@ -327,3 +327,60 @@ def read_raster_as_array(rasterfile):
     geoTransform = imgDataSource.GetGeoTransform()
     rasterBands = imgDataSource.GetRasterBand()
     return rasterBands, geoTransform
+
+
+def np2gdal_dtype(dtype=None):
+    if dtype == 'uint16':
+        res = gdal.GDT_UInt16
+    elif dtype == 'uint32':
+        res = gdal.GDT_UInt32
+    elif dtype == 'int16':
+        res = gdal.GDT_Int16
+    elif dtype == 'int32':
+        res = gdal.GDT_Int32
+    elif dtype == 'float32':
+        res = gdal.GDT_Float32
+    elif dtype == 'float64':
+        res = gdal.GDT_Float64
+    elif dtype == 'cint16':
+        res = gdal.GDT_CInt16
+    elif dtype == 'cint32':
+        res = gdal.GDT_CInt32
+    elif dtype == 'cfloat32':
+        res = gdal.GDT_CFloat32
+    elif dtype == 'cfloat64':
+        res = gdal.GDT_CFloat64
+    else:
+        raise CustomException("dtype not in the list")
+    return res
+
+
+def write_geotiff_file(arr, gt=None, sr=None, outfile_path=None, dtype=None):
+    # check if file already exists
+    if os.path.exists(outfile_path):
+        os.remove(outfile_path)
+    # check array dimension
+    dim = arr.ndim
+    # check no. of raster channels
+    if dim == 3:
+        nr, nc, n = arr.shape
+    else:
+        n = 1
+        nr, nc = arr.shape
+    # check output data type
+    if dtype == None:
+        dtype = gdal.GDT_UInt16
+    # write output
+    driver = gdal.GetDriverByName("GTiff")
+    outdata = driver.Create(outfile_path, nc, nr, n, dtype)
+    outdata.SetGeoTransform(gt)  # specify coords
+    outdata.SetProjection(sr)  # set projection
+    # create raster
+    if dim == 3:
+        for b in range(n):
+            outdata.GetRasterBand(b+1).WriteArray(arr[:, :, b])
+    else:
+        outdata.GetRasterBand(1).WriteArray(arr)
+    outdata.FlushCache()  # saves to disk!!
+    outdata = None
+    return

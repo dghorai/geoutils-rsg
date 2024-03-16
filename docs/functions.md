@@ -12,6 +12,8 @@ flip_line
 interval_points_straightline
 offset_random_point
 read_raster_as_array
+np2gdal_dtype
+write_geotiff_file
 ```
 
 ### ref_scripts.py

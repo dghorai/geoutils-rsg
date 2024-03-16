@@ -36,10 +36,4 @@ def extract_lulc_class(lulc_raster, out_raster, class_number=10):
     result.SetGeoTransform(geot)
     result.SetProjection(geop)
     driver.CreateCopy(out_raster, result)
-    return "Process Completed!"
-
-
-# if __name__ == "__main__":
-#     lulc_raster = r"D:\MyWorkingFolder\sample_lulc.img"
-#     out_raster = r"D:\MyWorkingFolder\sample_forest.img"
-#     extract_lulc_class(lulc_raster, out_raster, class_number=10)
+    return

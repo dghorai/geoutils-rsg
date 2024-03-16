@@ -12,6 +12,7 @@ import sys
 from osgeo import gdal, gdalnumeric, ogr
 from exception import CustomException
 from ref_scripts import world2Pixel
+from raster_ops.config_entity import RasterdataConfig
 
 
 class ClipRaster:
@@ -19,10 +20,11 @@ class ClipRaster:
     Clip Raster Data.
     """
 
-    def __init__(self, inRaster, inPolygon):
+    def __init__(self, rstconfig: RasterdataConfig):
         """constructure"""
-        self.inRaster = inRaster
-        self.inPolygon = inPolygon
+        self.rstconfig = rstconfig
+        self.inRaster = self.rstconfig.raster_infile
+        self.inPolygon = self.rstconfig.polygon_infile
 
     def subset_by_extent(self):
         # Open the image as a read only image

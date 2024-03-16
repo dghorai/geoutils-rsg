@@ -8,6 +8,7 @@ Convert raster to point shapefile.
 """
 
 from osgeo import gdal, gdalconst, gdalnumeric, ogr, osr
+from exception import CustomException
 
 
 def raster_to_point(raster_data, outpoint_file, outfield="DN"):
@@ -18,8 +19,8 @@ def raster_to_point(raster_data, outpoint_file, outfield="DN"):
     geop = ds.GetProjection()
     min_x = geot[0]
     max_y = geot[3]
-    max_x = min_x + geot[1]*ds.RasterXSize
-    min_y = max_y + geot[5]*ds.RasterYSize
+    # max_x = min_x + geot[1]*ds.RasterXSize
+    # min_y = max_y + geot[5]*ds.RasterYSize
     # get spatial reference from raster image
     sr = osr.SpatialReference()
     sr.ImportFromWkt(ds.GetProjection())
@@ -34,25 +35,29 @@ def raster_to_point(raster_data, outpoint_file, outfield="DN"):
     lyrDef = lyr.GetLayerDefn()
     # dataset to array
     array = gdalnumeric.LoadFile(raster_data)
-    # iterate over the numpy points
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            try:
-                x = j*geot[1] + min_x + geot[1]/2.0
-                y = i*geot[5] + max_y + geot[5]/2.0
-                # create points
-                point = ogr.Geometry(ogr.wkbPoint)
-                point.SetPoint(0, x, y)
-                # put point as a geometry inside a feature
-                featIndex = 0
-                feat = ogr.Feature(lyrDef)
-                feat.SetField(outfield, array[i][j])
-                feat.SetGeometry(point)
-                feat.SetFID(featIndex)
-                # put feature in a layer
-                lyr.CreateFeature(feat)
-            except:
-                pass
+    # check array dimension
+    if array.ndim == 3:
+        raise CustomException("found multi-channel raster data")
+    else:
+        # iterate over the numpy points
+        for i in range(array.shape[0]):
+            for j in range(array.shape[1]):
+                try:
+                    x = j*geot[1] + min_x + geot[1]/2.0
+                    y = i*geot[5] + max_y + geot[5]/2.0
+                    # create points
+                    point = ogr.Geometry(ogr.wkbPoint)
+                    point.SetPoint(0, x, y)
+                    # put point as a geometry inside a feature
+                    featIndex = 0
+                    feat = ogr.Feature(lyrDef)
+                    feat.SetField(outfield, array[i][j])
+                    feat.SetGeometry(point)
+                    feat.SetFID(featIndex)
+                    # put feature in a layer
+                    lyr.CreateFeature(feat)
+                except:
+                    pass
     # Flush
     shapeData.Destroy()
-    return "Process Completed!"
+    return
