@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rsgis-toolbox"
-version = "0.0.2"
+name = "geo-bhumi"
+version = "0.0.3"
 authors = [
   { name="Debabrata Ghorai", email="ghoraideb@gmail.com" },
 ]
-description = "Geospatial utilities for Remote Sensing and GIS application"
+description = "Geospatial Utilities for Remote Sensing and GIS Application"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -18,8 +18,8 @@ classifiers = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["geobhumi"]
 
 [project.urls]
-"Homepage" = "https://github.com/dghorai/rsgis-toolbox"
-"Bug Tracker" = "https://github.com/dghorai/rsgis-toolbox/issues"
+"Homepage" = "https://github.com/dghorai/geo-bhumi"
+"Bug Tracker" = "https://github.com/dghorai/geo-bhumi/issues"

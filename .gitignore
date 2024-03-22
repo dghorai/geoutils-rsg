@@ -131,11 +131,8 @@ dmypy.json
 # others
 .idea
 logs/*
-src/__pycache__
-src/raster/__pycache__
-src/raster/components/__pycache__
-src/raster/pipeline/__pycache__
-src/vector/__pycache__
-src/vector/components/__pycache__
-src/vector/pipeline/__pycache__
-test/__pycache__
+geobhumi/__pycache__
+geobhumi/geo_app/__pycache__
+geobhumi/raster_ops/__pycache__
+geobhumi/vector_ops/__pycache__
+tests/__pycache__

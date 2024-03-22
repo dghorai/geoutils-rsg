@@ -12,15 +12,15 @@ def get_requirements():
 
 
 setup(
-    name='rsgis-toolbox',
-    version='0.0.2',
-    package_dir={"": "src"},
-    packages=find_packages(where='src'),
+    name='geo-bhumi',
+    version='0.0.3',
+    package_dir={"": "geobhumi"},
+    packages=find_packages(where='geobhumi'),
     url='https://github.com/dghorai',
     license='MIT License',
     author='Debabrata Ghorai, Ph.D.',
     author_email='ghoraideb@gmail.com',
-    description='Geospatial utilities for Remote Sensing and GIS application',
+    description='Geospatial Utilities for Remote Sensing and GIS Application',
     long_description=readme(),
     install_requires=get_requirements()
 )
