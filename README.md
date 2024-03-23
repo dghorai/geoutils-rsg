@@ -44,9 +44,10 @@ The `geoutils-rsg` Python package aims to simplify geospatial tasks and automate
 
 ### Tools for Application
 
-| Functions or Classes        | Descriptions         |
-| :-------------------------- | :------------------- |
-| generate_shoreline_raster() | Shoreline Extraction |
+| Functions or Classes               | Descriptions                                                                                   |
+| :--------------------------------- | :--------------------------------------------------------------------------------------------- |
+| generate_shoreline_raster()        | Shoreline Extraction                                                                           |
+| generate_morphometric_parameters() | Morphometric Analysis for Prioritizing Sub-watershed and Management Using Geospatial Technique |
 
 # Installation
 
