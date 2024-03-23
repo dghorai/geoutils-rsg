@@ -9,9 +9,9 @@ Closest point extraction between point and line.
 import sys
 
 from pathlib import Path
-from geobhumi.utils import reading_polyline, dist_calc
-from geobhumi.ref_scripts import intersect_point_to_line
-from geobhumi.config_entity import PointConfig, PolylineConfig
+from rsgtools.utils import reading_polyline, dist_calc
+from rsgtools.ref_scripts import intersect_point_to_line
+from rsgtools.config_entity import PointConfig, PolylineConfig
 
 
 class FindNearestPoint:

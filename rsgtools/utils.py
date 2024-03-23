@@ -16,7 +16,7 @@ import numpy as np
 from osgeo import ogr, osr, gdal, gdalconst
 from ensure import ensure_annotations
 from typing import Any
-from geobhumi import CustomException, logger
+from rsgtools import CustomException, logger
 
 
 @ensure_annotations

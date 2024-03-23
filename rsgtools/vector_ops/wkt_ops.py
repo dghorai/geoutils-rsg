@@ -12,12 +12,12 @@ import pandas as pd
 import geopandas as gpd
 import numpy as np
 
-from geobhumi.ref_scripts import (
+from rsgtools.ref_scripts import (
     line_intersection,
     ray_tracing_method,
     sort_counter_clockwise
 )
-from geobhumi import CustomException
+from rsgtools import CustomException
 
 warnings.filterwarnings(action='ignore')
 

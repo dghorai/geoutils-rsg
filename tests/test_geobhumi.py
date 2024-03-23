@@ -1,5 +1,5 @@
 """
-Test geo-bhumi package.
+Test geoutils-rsg package.
 """
 
 
@@ -7,15 +7,15 @@ import os
 import pandas as pd
 import time
 
-from geobhumi.vector_ops.create_grid_boundary import generate_grid_boundary
-from geobhumi.raster_ops.clip_raster import clip_raster_by_extent
-from geobhumi.vector_ops.find_nearest_point import get_nearest_point
-from geobhumi.vector_ops.geometry_ops import CreateObjectID, CreateGroupID, GenerateHydroID
-from geobhumi.vector_ops.create_crosssection_line import generate_river_xscl
-from geobhumi.vector_ops.merge_vector_files import merge_shapefiles
-from geobhumi.vector_ops.wkt_ops import WktUtils
-from geobhumi.raster_ops.mosaic_large_geotiffs import mosaic_raster
-from geobhumi import project_dir
+from rsgtools.vector_ops.create_grid_boundary import generate_grid_boundary
+from rsgtools.raster_ops.clip_raster import clip_raster_by_extent
+from rsgtools.vector_ops.find_nearest_point import get_nearest_point
+from rsgtools.vector_ops.geometry_ops import CreateObjectID, CreateGroupID, GenerateHydroID
+from rsgtools.vector_ops.create_crosssection_line import generate_river_xscl
+from rsgtools.vector_ops.merge_vector_files import merge_shapefiles
+from rsgtools.vector_ops.wkt_ops import WktUtils
+from rsgtools.raster_ops.mosaic_large_geotiffs import mosaic_raster
+from rsgtools import project_dir
 
 
 def test_ClipRaster():

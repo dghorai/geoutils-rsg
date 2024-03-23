@@ -5,7 +5,7 @@ import struct
 from osgeo import ogr, gdal
 from pyproj import Proj
 from scipy.spatial import ConvexHull
-from geobhumi.utils import (
+from rsgtools.utils import (
     dist_calc,
     flip_line,
     reading_polyline,

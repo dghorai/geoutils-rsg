@@ -12,7 +12,7 @@ def get_requirements():
 
 
 setup(
-    name='geo-bhumi',
+    name='geoutils-rsg',
     version='0.0.3',
     package_dir={"": "geobhumi"},
     packages=find_packages(where='geobhumi'),

@@ -1,5 +1,5 @@
 """
-Top-level package for geo-bhumi.
+Top-level package for geoutils-rsg.
 """
 
 __version__ = '0.0.3'

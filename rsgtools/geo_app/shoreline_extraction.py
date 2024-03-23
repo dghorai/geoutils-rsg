@@ -21,8 +21,8 @@ import scipy
 
 from osgeo import gdal
 from osgeo.gdalconst import *
-from geobhumi import logger
-from geobhumi.utils import (
+from rsgtools import logger
+from rsgtools.utils import (
     timeit,
     OTSU,
     write_geotiff_file

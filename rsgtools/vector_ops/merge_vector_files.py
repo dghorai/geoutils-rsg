@@ -9,8 +9,8 @@ Merge vector files.
 import os
 
 from osgeo import ogr
-from geobhumi.config_entity import VectordataConfig
-from geobhumi import CustomException
+from rsgtools.config_entity import VectordataConfig
+from rsgtools import CustomException
 
 
 class MergeVectorFiles:

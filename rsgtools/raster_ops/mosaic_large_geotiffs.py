@@ -10,15 +10,14 @@ Objective: Mosaic large GeoTiff files using GDAL and Python extension package wi
 # Import Modules
 import os
 import time
-import datetime
 import numpy
 import ctypes
 import subprocess
 
 from osgeo import gdal
 from osgeo.gdalconst import *
-from geobhumi import project_dir, logger
-from geobhumi.utils import timeit, write_geotiff_file
+from rsgtools import project_dir, logger
+from rsgtools.utils import timeit, write_geotiff_file
 
 
 class LargeGeoTiffMosaic:

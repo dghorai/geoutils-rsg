@@ -12,10 +12,10 @@ import os
 import math
 
 from osgeo import ogr
-from geobhumi import logger
-from geobhumi.ref_scripts import fixed_interval_points
-from geobhumi.config_entity import PolylineConfig
-from geobhumi.utils import get_shapefile_epsg_code
+from rsgtools import logger
+from rsgtools.ref_scripts import fixed_interval_points
+from rsgtools.config_entity import PolylineConfig
+from rsgtools.utils import get_shapefile_epsg_code
 
 
 class XSCL:

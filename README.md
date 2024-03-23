@@ -1,4 +1,4 @@
-# geo-bhumi
+# geoutils-rsg
 
 Geospatial Utilities for Remote Sensing and GIS Application.
 
@@ -6,7 +6,7 @@ This repository has several scripts written in Python for Remote Sensing and GIS
 
 # Introduction
 
-The `geo-bhumi` Python package aims to simplify geospatial tasks and automate geospatial application development. This library provides a comprehensive set of tools for Remote Sensing and GIS. By addressing the gaps in geospatial data processing tools and offering automation capabilities, this package proves to be an essential resource. Many of the tools are derived from scientific research articles, while others consist of efficient algorithms that enable streamlined processing with minimal code. With these tools, users or researchers can focus on analyzing their application results rather than spending time on coding or starting from scratch.
+The `geoutils-rsg` Python package aims to simplify geospatial tasks and automate geospatial application development. This library provides a comprehensive set of tools for Remote Sensing and GIS. By addressing the gaps in geospatial data processing tools and offering automation capabilities, this package proves to be an essential resource. Many of the tools are derived from scientific research articles, while others consist of efficient algorithms that enable streamlined processing with minimal code. With these tools, users or researchers can focus on analyzing their application results rather than spending time on coding or starting from scratch.
 
 # Features
 
@@ -50,6 +50,6 @@ The `geo-bhumi` Python package aims to simplify geospatial tasks and automate ge
 
 # Installation
 
-pip install git+https://github.com/dghorai/geo-bhumi
+pip install git+https://github.com/dghorai/geoutils-rsg
 
 # Acknowledgment
