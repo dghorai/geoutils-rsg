@@ -14,6 +14,10 @@ offset_random_point
 read_raster_as_array
 np2gdal_dtype
 write_geotiff_file
+timeit
+Histogram
+OTSU
+get_shapefile_epsg_code
 ```
 
 ### ref_scripts.py

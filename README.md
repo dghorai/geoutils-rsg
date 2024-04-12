@@ -48,6 +48,7 @@ The `geoutils-rsg` Python package aims to simplify geospatial tasks and automate
 | :--------------------------------- | :--------------------------------------------------------------------------------------------- |
 | generate_shoreline_raster()        | Shoreline Extraction                                                                           |
 | generate_morphometric_parameters() | Morphometric Analysis for Prioritizing Sub-watershed and Management Using Geospatial Technique |
+| shoreline_change_analysis() | Digital Shoreline Change-Rate Analysis (example: `notebooks/shoreline_change_rate.ipynb`) |
 
 # Installation
 

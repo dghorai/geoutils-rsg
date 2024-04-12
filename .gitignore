@@ -131,8 +131,9 @@ dmypy.json
 # others
 .idea
 logs/*
-geobhumi/__pycache__
-geobhumi/geo_app/__pycache__
-geobhumi/raster_ops/__pycache__
-geobhumi/vector_ops/__pycache__
+rsgtools/__pycache__
+rsgtools/geo_app/__pycache__
+rsgtools/raster_ops/__pycache__
+rsgtools/vector_ops/__pycache__
 tests/__pycache__
+tests/results/*

@@ -7,7 +7,6 @@ class PointConfig:
     inpoint: Path
     single_point: tuple
     point_offset: float
-    point_file_coordinate_sys: str
 
 
 @dataclass(frozen=True)
@@ -24,7 +23,6 @@ class PolylineConfig:
     linefield: str
     interval: int
     offset: int
-    coordsys: str
 
 
 @dataclass(frozen=True)
@@ -52,7 +50,3 @@ class RasterdataConfig:
     lmin_list: list
     qcal_min: float
     qcal_max: float
-    prefix: str
-    lulc_raster_file: Path
-    lulc_out_raster_file: Path
-    lilc_class_code: int

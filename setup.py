@@ -14,8 +14,8 @@ def get_requirements():
 setup(
     name='geoutils-rsg',
     version='0.0.3',
-    package_dir={"": "geobhumi"},
-    packages=find_packages(where='geobhumi'),
+    package_dir={"": "rsgtools"},
+    packages=find_packages(where='rsgtools'),
     url='https://github.com/dghorai',
     license='MIT License',
     author='Debabrata Ghorai, Ph.D.',

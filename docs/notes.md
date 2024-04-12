@@ -1,9 +1,41 @@
 # Notes:
 
-- convert ipynb to py file in vscode: ctrl+shift+p --> type Export --> select Export to Python Script
-- project layouts: https://realpython.com/python-application-layouts/
-- python project structure: https://github.com/yngvem/python-project-structure
+- Convert ipynb to py file in vscode: ctrl+shift+p --> type Export --> select Export to Python Script
+- Project layouts: https://realpython.com/python-application-layouts/
+- Python project structure: https://github.com/yngvem/python-project-structure
 - Reset GitHub repository URL on local system if you changed it: https://stackoverflow.com/questions/30443333/error-with-renamed-repo-in-github-remote-this-repository-moved-please-use-th
   - To check the current one: git remote -v
   - If it was origin, Then you change it like: git remote set-url origin https://github.com/YOUR-USERNAME/YOUR-REPO
   - If it was upstream, you change it like: git remote set-url upstream https://github.com/YOUR-USERNAME/YOUR-REPO
+- Git Commands:
+  - Run this command to see what branch you're on: `git status`
+  - Run this command to see local branches: `git branch`
+  - Run this command to see remote branches: `git branch -r`
+  - Run this command to see all local and remote branches: `git branch -a`
+  - Create a new branch:
+    - `git checkout -b <new-branch-name>`
+  - Switch to a branch in your local repo: `git checkout <new-branch name>`
+  - Run this command to get a list of all branches from the remote: `git pull`
+  - Run this command to switch to a branch that came from a remote repo: `git checkout --track origin/<new-branch-name>`
+  - Push to a branch if local branch already exists on the remote: `git push origin <new-branch-name>` or `git push`
+  - Push to a branch if local branch does not exist on the remote: `git push -u origin <my-branch-name>` or `git push -u origin HEAD`
+  - Rename git branch:
+    - To rename the current branch: `git branch -m <type new name of the current branch>`
+    - To rename a branch while pointed to any branch: `git branch -m <old name of the branch> <new name of the branch>`
+  - Merge a branch:
+    - `git status`
+    - `git checkout <master-branch-name>`
+    - `git merge <dev-branch-name>`
+  - Delete branches:
+    - Run this command to delete a remote branch: `git push origin --delete <remote-branch-name>`
+    - Run this command to delete a local branch: `git branch -d <local-branch-name>` or `git branch -D <local-branch-name>`
+  - More commands:
+    - `git stash` when you want to change to a different branch, and you want to store changes that are not ready to be committed.
+  - Steps to follow after every edit in the project:
+    - `git status`
+    - `git add .` or `git add <updated/newly created file name>`
+    - `git commit -m "<add some comments to remember the edited work>"`
+    - `git stash` (if needed)
+    - `git pull` (if needed)
+    - `git push origin <remote-branch-name>`
+    - `git status`

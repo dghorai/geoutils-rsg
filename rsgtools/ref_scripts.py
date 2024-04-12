@@ -5,12 +5,14 @@ import struct
 from osgeo import ogr, gdal
 from pyproj import Proj
 from scipy.spatial import ConvexHull
+from consts import DEG_TO_KM
 from rsgtools.utils import (
     dist_calc,
     flip_line,
     reading_polyline,
     line_slope,
-    read_raster_as_array
+    read_raster_as_array,
+    get_shapefile_epsg_code
 )
 
 
@@ -56,25 +58,64 @@ def intersect_point_to_line(point, line_start, line_end):
         ix = dist_calc(point, line_start)
         iy = dist_calc(point, line_end)
         if ix > iy:
-            return line_end
+            res = line_end
         else:
-            return line_start
+            res = line_start
     else:
         ix = line_start[0]+u*(line_end[0]-line_start[0])
         iy = line_start[1]+u*(line_end[1]-line_start[1])
-        return ix, iy
+        res = (ix, iy)
+
+    return res
 
 
 # [3, 4]
+def mid_point(p1, p2, l1, l2):
+    iX = p1[0]+((p2[0]-p1[0])*(l1/l2))
+    iY = p1[1]+((p2[1]-p1[1])*(l1/l2))
+    pts = [iX, iY]
+    return pts
+
+
+def interval_point(objects, nodes, interval):
+    points = []
+    slopes = []
+    for n, i in zip(objects, nodes):
+        tDist = 0  # total distance
+        vPoint = None  # previous point
+        for pnt in i:
+            if not isinstance(vPoint, type(None)):
+                thisDist = dist_calc(list(vPoint), list(pnt))
+                maxAddDist = interval - tDist
+                if (tDist+thisDist) > interval:
+                    pCnt = int((tDist+thisDist)/interval)
+                    for k in range(pCnt):
+                        maxAddDist = interval - tDist
+                        nPoint = mid_point(
+                            vPoint, pnt, maxAddDist, thisDist)
+                        slope = line_slope(list(vPoint), nPoint)
+                        points.append(nPoint+[n])
+                        slopes.append(slope)
+                        vPoint = nPoint
+                        thisDist = dist_calc(list(vPoint), list(pnt))
+                        tDist = 0
+                    tDist += thisDist
+                else:
+                    tDist += thisDist
+            else:
+                tDist = 0
+            vPoint = pnt
+    return points, slopes
+
+
 def fixed_interval_points(infc, interval, flipline=False, save=False, outfc=None, lineslope=False):
     """Generate fixed interval points along polyline.
     """
 
-    def mid_point(p1, p2, l1, l2):
-        iX = p1[0]+((p2[0]-p1[0])*(l1/l2))
-        iY = p1[1]+((p2[1]-p1[1])*(l1/l2))
-        pts = [iX, iY]
-        return pts
+    # check scr projection and change interval accordingly
+    src_epsg_code = get_shapefile_epsg_code(infc)
+    if src_epsg_code == 4326:
+        interval = interval/DEG_TO_KM/1000.0
 
     # get nodes and objectids
     if flipline == True:
@@ -85,35 +126,10 @@ def fixed_interval_points(infc, interval, flipline=False, save=False, outfc=None
         objects, nodes = reading_polyline(infc)
 
     # generate points
-    points = []
-    slopes = []
-    for n, i in zip(objects, nodes):
-        tDist = 0  # total distance
-        vPoint = None  # previous point
-        for pnt in i:
-            if not (vPoint is None):
-                thisDist = dist_calc(vPoint, pnt)
-                maxAddDist = interval - tDist
-                if (tDist+thisDist) > interval:
-                    pCnt = int((tDist+thisDist)/interval)
-                    for k in range(pCnt):
-                        maxAddDist = interval - tDist
-                        nPoint = mid_point(
-                            vPoint, pnt, maxAddDist, thisDist)
-                        slope = line_slope(vPoint, nPoint)
-                        points.append(nPoint+[n])
-                        slopes.append(slope)
-                        vPoint = nPoint
-                        thisDist = dist_calc(vPoint, pnt)
-                        tDist = 0
-                    tDist += thisDist
-                else:
-                    tDist += thisDist
-            else:
-                tDist = 0
-            vPoint = pnt
+    points, slopes = interval_point(objects, nodes, interval)
 
     # save if needed
+    res = None
     if save == True:
         openfile = ogr.Open(infc)
         in_layer = openfile.GetLayer(0)
@@ -141,12 +157,11 @@ def fixed_interval_points(infc, interval, flipline=False, save=False, outfc=None
 
         # Flush
         shapeData.Destroy()
-
-    # return points
-    if lineslope == True:
-        return points, slopes
+    elif lineslope == True:
+        res = (points, slopes)
     else:
-        return points
+        res = points
+    return res
 
 
 # [5]
@@ -328,6 +343,19 @@ def extract_pixel_value(imgfile, point_list):
     return pnt_values
 
 
+# [13]
+def find_wgs2utm_epsg_code(lon: float, lat: float):
+    """Based on lat and lng, return best utm epsg-code"""
+    utm_band = str((math.floor((lon + 180) / 6) % 60) + 1)
+    if len(utm_band) == 1:
+        utm_band = '0'+utm_band
+    if lat >= 0:
+        epsg_code = '326' + utm_band
+        return epsg_code
+    epsg_code = '327' + utm_band
+    return epsg_code
+
+
 # Reference:
 # [1] https://gis.stackexchange.com/questions/57964/get-vector-features-inside-a-specific-extent
 # [2] https://gis.stackexchange.com/questions/396/nearest-neighbor-between-point-layer-and-line-layer
@@ -341,6 +369,7 @@ def extract_pixel_value(imgfile, point_list):
 # [10] https://stackoverflow.com/questions/24467972/calculate-area-of-polygon-given-x-y-coordinates
 # [11] http://stackoverflow.com/questions/13416764/clipping-raster-image-with-a-polygon-suggestion-to-resolve-an-error-related-to
 # [12] http://gis.stackexchange.com/questions/46893/how-do-i-get-the-pixel-value-of-a-gdal-raster-under-an-ogr-point-without-numpy
+# [13] https://gis.stackexchange.com/questions/269518/auto-select-suitable-utm-zone-based-on-grid-intersection
 
 # https://gis.stackexchange.com/questions/392515/create-a-shapefile-from-geometry-with-ogr
 # https://www.gis.usu.edu/~chrisg/python/2009/lectures/ospy_slides2.pdf

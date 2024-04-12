@@ -43,12 +43,25 @@ class FindNearestPoint:
         return nearest_pnt
 
 
-def get_nearest_point(point: str, ref_line_file: Path):
+def get_nearest_point(point: list, ref_line_file: Path):
     pntconfig = PointConfig(
-        single_point=point
+        inpoint=None,
+        single_point=point,
+        point_offset=None
     )
     plconfig = PolylineConfig(
-        inline=ref_line_file
+        inline=ref_line_file,
+        fnodeid=None,
+        tnodeid=None,
+        lineid=None,
+        seqid=None,
+        is_xscl_available=None,
+        outxsclline=None,
+        uidfield=None,
+        objectidfield=None,
+        linefield=None,
+        interval=None,
+        offset=None
     )
     obj = FindNearestPoint(pntconfig=pntconfig, plineconfig=plconfig)
     res = obj.find_closest_point()
