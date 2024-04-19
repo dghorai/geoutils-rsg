@@ -1,10 +1,12 @@
 import math
 import numpy as np
 import struct
+import xarray as xr
 
 from osgeo import ogr, gdal
 from pyproj import Proj
 from scipy.spatial import ConvexHull
+from scipy.linalg import solve
 from consts import DEG_TO_KM
 from rsgtools.utils import (
     dist_calc,
@@ -14,6 +16,8 @@ from rsgtools.utils import (
     read_raster_as_array,
     get_shapefile_epsg_code
 )
+from itertools import product
+from sklearn.metrics import mean_squared_error as MSE
 
 
 # [1]
@@ -356,6 +360,118 @@ def find_wgs2utm_epsg_code(lon: float, lat: float):
     return epsg_code
 
 
+# [14]
+# spatial interpolation algo
+def euclidean_dist(x1,x2,y1,y2):
+    return ((x1-x2)**2+(y1-y2)**2)**0.5
+
+def nearest_neighbor(df, yy, xx, z_field=None):
+    # yy -> Flatten array of Lats (gridded)
+    # xx -> Flatten array of Longs (gridded)
+    # Nearest Neighbor (NN) 
+    array = np.empty((yy.shape[0], xx.shape[0]))
+    for i, lat in enumerate(yy):
+        for j, lon in enumerate(xx):
+            idx = df.apply(lambda row: euclidean_dist(row.LONGITUDE, lon, row.LATITUDE, lat), axis = 1).argmin()
+        array[i,j] = df.loc[idx, z_field]
+    ds = xr.Dataset(
+        {
+            z_field: (['lat', 'lon'], array)
+        },
+        coords={'lat': yy, 'lon': xx}
+    )
+    return ds
+
+def IDW(df, yy, xx, betta=2, z_field=None):
+    # Inverse Distance Weighting (IDW)
+    array = np.empty((yy.shape[0], xx.shape[0]))
+    for i, lat in enumerate(yy):
+        for j, lon in enumerate(xx):
+            weights = df.apply(lambda row: euclidean_dist(row.LONGITUDE, lon, row.LATITUDE, lat)**(-betta), axis = 1)
+            z = sum(weights*df.z_field)/weights.sum()
+            array[i,j] = z
+    ds = xr.Dataset(
+        {
+            z_field: (['lat', 'lon'], array)
+        },
+        coords={'lat': yy, 'lon': xx}
+    )
+    return ds
+
+class OrdinaryKriging:
+    def __init__(self, lats, lons, values):
+        self.lats = lats
+        self.lons= lons
+        self.values = values
+        self.nugget_values = [0, 1, 2, 3, 4]
+        self.sill_values = [1, 2, 3, 4, 5]
+        self.range_values = [1, 2, 3, 4, 5]
+
+        # Generate all combinations of parameter values
+        self.parameter_combinations = list(product(self.nugget_values, self.sill_values, self.range_values))
+        self.optimal_pars = None
+
+    def theoretical_variogram(self, h, nugget, sill, r):
+        return nugget + (sill-nugget) * (1-np.exp(-3*h/r))
+
+    def euclidean(self, X, Y):
+        all_dists, point_dists = [], []
+        for x,y in zip(X, Y):
+          k = 0
+          for k in range(len(X)):
+            h = np.linalg.norm(np.array([x, y]) - np.array([X[k], Y[k]]))
+            point_dists.append(h)
+          all_dists.append(point_dists)
+          point_dists = []
+        return all_dists
+
+    def gamma(self):
+        distances = self.euclidean(self.lats, self.lons)
+        differences = np.abs(self.values.reshape(-1,1) - self.values)
+        variogram_values = []
+        for h in np.unique(distances):
+            values_at_h = differences[(distances == h)]
+            variogram_values.append(np.mean(values_at_h**2))
+        return variogram_values, np.unique(distances)
+
+    def fit(self):
+        experimental_variogram, distances = self.gamma()
+        fit_metrics = []
+        for nugget, sill, range_ in self.parameter_combinations:
+            theoretical_variogram_values = self.theoretical_variogram(distances, nugget, sill, range_)
+            fit_metric = MSE(experimental_variogram, theoretical_variogram_values)
+            fit_metrics.append((nugget, sill, range_, fit_metric))
+
+        self.optimal_pars = min(fit_metrics, key=lambda x: x[3])[:3]
+
+    def predict(self, point):
+        points = np.array([(x,y) for x,y in zip(self.lats, self.lons)])
+        distances = np.linalg.norm(points - point, axis=1)
+        pars = list(self.optimal_pars)
+        pars.insert(0, distances)
+        weights = self.theoretical_variogram(*pars)
+        weights /= np.sum(weights)
+        return np.dot(weights, self.values)
+
+def ordinary_kriging(df, yy, xx, z_field=None):
+    kriging = OrdinaryKriging(df.LATITUDE.values, df.LONGITUDE.values, df.z_field.values)
+    kriging.fit()
+    row, grid = [], []
+    for lat in yy:
+        for lon in xx:
+            row.append(kriging.predict(np.array([lat, lon])))
+        grid.append(row)
+        row=[]
+    ds = xr.Dataset(
+        {
+            z_field: (['lat', 'lon'], grid)
+        },
+        coords={'lat': yy, 'lon': xx}
+    )
+    return ds
+
+
+
 # Reference:
 # [1] https://gis.stackexchange.com/questions/57964/get-vector-features-inside-a-specific-extent
 # [2] https://gis.stackexchange.com/questions/396/nearest-neighbor-between-point-layer-and-line-layer
@@ -370,6 +486,7 @@ def find_wgs2utm_epsg_code(lon: float, lat: float):
 # [11] http://stackoverflow.com/questions/13416764/clipping-raster-image-with-a-polygon-suggestion-to-resolve-an-error-related-to
 # [12] http://gis.stackexchange.com/questions/46893/how-do-i-get-the-pixel-value-of-a-gdal-raster-under-an-ogr-point-without-numpy
 # [13] https://gis.stackexchange.com/questions/269518/auto-select-suitable-utm-zone-based-on-grid-intersection
+# [14] https://github.com/alexxxroz/Medium/blob/main/SpatialInterpolation.ipynb
 
 # https://gis.stackexchange.com/questions/392515/create-a-shapefile-from-geometry-with-ogr
 # https://www.gis.usu.edu/~chrisg/python/2009/lectures/ospy_slides2.pdf
