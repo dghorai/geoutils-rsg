@@ -1,0 +1,14 @@
+### Machine Learning Algorithms
+- Linear Regression
+- Ridge, Lasso, and Elastic Net Regression
+- Logistic Regression
+- Decision Tree
+- SVM (Support Vector Machine)
+- Random Forest
+- Gradient Boosting
+- XGBoost
+- Naive Bayes
+- K-NN (K-Nearest Neighbors)
+- K-means
+- PCA
+- SGD (Stochastic Gradient Descent)

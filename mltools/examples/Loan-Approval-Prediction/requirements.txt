@@ -1,0 +1,5 @@
+scikit-learn==1.1.0
+# pip install -U scikit-learn==1.1.0
+pickleshare==0.7.5
+pandas==1.5.3
+tensorflow==2.12.0rc0

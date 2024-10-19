@@ -1,0 +1,35 @@
+# Deep Learning
+- Neural Networks
+- Perceptron
+- MLP
+- Activation Functions
+- Forward Propagation and Backward Propagation
+- ANN
+- Callback Functions
+- Loss Functions
+- Batch Normalization
+- Regularization
+- Weight Initialization
+- Optimizers
+- Stochastic Gradient Descent
+- Vanishing Gradient
+- Transfer Learning
+- Hyperparameter Tuning
+- Convolution Layers
+- Pooling Layers
+- Full-Connected Layers
+
+## Deep Learning Algorithms
+- Convolutional Neural Networks (CNNs)
+- Feedforward Neural Networks (FNNs)
+- Long Short Term Memory Networks (LSTMs)
+- Recurrent Neural Networks (RNNs)
+- Generative Adversarial Networks (GANs)
+- Radial Basis Function Networks (RBFNs)
+- Multilayer Perceptrons (MLPs)
+- Self Organizing Maps (SOMs)
+- Deep Belief Networks (DBNs)
+- Restricted Boltzmann Machines( RBMs)
+- Autoencoders
+- Transformers
+- Graph Neural Networks

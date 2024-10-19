@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 120px;
+      }
+
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 20px;
+        background-color: rgb(208, 205, 248);
+      }
+      .btn1 {
+        margin-right: 75px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_user_data')}}" method="POST">
+        <div class="form-group">
+          <label for="rate_marriage">rate_marriage: </label>
+          <input
+            list="marriagerating"
+            id="rate_marriage"
+            name="rate_marriage"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="marriagerating">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="age">age: </label>
+          <input type="text" id="age" name="age" placeholder="Enter age" />
+        </div>
+
+        <div class="form-group">
+          <label for="yrs_married">yrs_married:</label>
+          <input
+            type="text"
+            id="yrs_married"
+            name="yrs_married"
+            placeholder="No. of years married"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="children">children:</label>
+          <input
+            type="text"
+            id="children"
+            name="children"
+            placeholder="No. of children"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="religious">religious:</label>
+          <input
+            list="religioustype"
+            id="religious"
+            name="religious"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="religioustype">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="educ">educ:</label>
+          <input
+            list="gradelist"
+            id="educ"
+            name="educ"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="gradelist">
+            <option value="9"></option>
+            <option value="12"></option>
+            <option value="14"></option>
+            <option value="16"></option>
+            <option value="17"></option>
+            <option value="20"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="occupation">occupation:</label>
+          <input
+            list="jobtype"
+            id="occupation"
+            name="occupation"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="jobtype">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+            <option value="6"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="occupation_husb">occupation_husb:</label>
+          <input
+            list="jobtypehusb"
+            id="occupation_husb"
+            name="occupation_husb"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="jobtypehusb">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+            <option value="4"></option>
+            <option value="5"></option>
+            <option value="6"></option>
+          </datalist>
+        </div>
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

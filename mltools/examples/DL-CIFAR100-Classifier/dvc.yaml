@@ -1,0 +1,49 @@
+stages:
+  data_ingestion:
+    cmd: python src/CNNClassifier/pipeline/stage1_data_ingestion.py
+    deps:
+      - src/CNNClassifier/pipeline/stage1_data_ingestion.py
+      - configs/config.yaml
+    outs:
+      - artifacts/data_ingestion/cifar-100-python
+  prepare_base_model:
+    cmd: python src/CNNClassifier/pipeline/stage2_prepare_base_model.py
+    deps:
+      - src/CNNClassifier/pipeline/stage2_prepare_base_model.py
+      - configs/config.yaml
+    params:
+      - IMAGE_SIZE
+      - INCLUDE_TOP
+      - CLASSES
+      - WEIGHTS
+      - LEARNING_RATE
+    outs:
+      - artifacts/prepare_base_model
+  training:
+    cmd: python src/CNNClassifier/pipeline/stage3_training.py
+    deps:
+      - src/CNNClassifier/pipeline/stage3_training.py
+      - src/CNNClassifier/components/prepare_callbacks.py
+      - configs/config.yaml
+      - artifacts/data_ingestion/cifar-100-python
+      - artifacts/prepare_base_model
+    params:
+      - IMAGE_SIZE
+      - EPOCHS
+      - BATCH_SIZE
+      - AUGMENTATION
+    outs:
+      - artifacts/training/model.h5
+  evaluation:
+    cmd: python src/CNNClassifier/pipeline/stage4_evaluation.py
+    deps:
+      - src/CNNClassifier/pipeline/stage4_evaluation.py
+      - configs/config.yaml
+      - artifacts/data_ingestion/cifar-100-python
+      - artifacts/training/model.h5
+    params:
+      - IMAGE_SIZE
+      - BATCH_SIZE
+    metrics:
+      - scores.json:
+          cache: false

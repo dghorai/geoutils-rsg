@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 250px;
+      }
+
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 20px;
+        background-color: rgb(208, 205, 248);
+      }
+      .btn1 {
+        margin-right: 75px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_user_data')}}" method="POST">
+        <div class="form-group">
+          <label for="Pclass">Passenger Class: </label>
+          <input
+            list="pclist"
+            id="Pclass"
+            name="Pclass"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="pclist">
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="Sex">Passenger Gender:</label>
+          <input
+            list="gendertype"
+            id="Sex"
+            name="Sex"
+            placeholder="Select from dropdown"
+          />
+          <datalist id="gendertype">
+            <option value="female"></option>
+            <option value="male"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="Age">Passenger Age: </label>
+          <input type="text" id="Age" name="Age" placeholder="Enter age" />
+        </div>
+
+        <div class="form-group">
+          <label for="SibSp">Number of Siblings/Spouses Aboard:</label>
+          <input
+            type="text"
+            id="SibSp"
+            name="SibSp"
+            placeholder="No. of siblings/spouses aboard"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="Parch">Number of Parents/Children Aboard:</label>
+          <input
+            type="text"
+            id="Parch"
+            name="Parch"
+            placeholder="No. of parents/children aboard"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="Fare">Passenger Fare (British pound):</label>
+          <input
+            type="text"
+            id="Fare"
+            name="Fare"
+            placeholder="Passenger fare amount"
+          />
+        </div>
+
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

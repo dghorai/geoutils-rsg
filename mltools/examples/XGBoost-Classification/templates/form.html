@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      let elmts = [
+        "United-States",
+        "Canada",
+        "Puerto-Rico",
+        "El-Salvador",
+        "Cuba",
+        "Jamaica",
+        "Dominican-Republic",
+        "Guatemala",
+        "Haiti",
+        "Nicaragua",
+        "Trinadad&Tobago",
+        "Honduras",
+        "Mexico",
+        "Columbia",
+        "Vietnam",
+        "Peru",
+        "Ecuador",
+        "South",
+        "Outlying-US(Guam-USVI-etc)",
+        "Germany",
+        "England",
+        "Italy",
+        "Poland",
+        "Portugal",
+        "Greece",
+        "Yugoslavia",
+        "France",
+        "Ireland",
+        "Scotland",
+        "Hungary",
+        "Holand-Netherlands",
+        "India",
+        "Iran",
+        "China",
+        "Japan",
+        "Thailand",
+        "Hong",
+        "Cambodia",
+        "Laos",
+        "Philippines",
+        "Taiwan",
+        "unknown",
+      ];
+      let edu = [
+        "1st-4th",
+        "5th-6th",
+        "7th-8th",
+        "9th",
+        "10th",
+        "11th",
+        "12th",
+        "Bachelors",
+        "HS-grad",
+        "Masters",
+        "Some-college",
+        "Assoc-acdm",
+        "Assoc-voc",
+        "Doctorate",
+        "Prof-school",
+        "Preschool",
+      ];
+      let workcls = [
+        "State-gov",
+        "Self-emp-not-inc",
+        "Private",
+        "Federal-gov",
+        "Local-gov",
+        "unknown",
+        "Self-emp-inc",
+        "Without-pay",
+        "Never-worked",
+      ];
+      let ms = [
+        "Never-married",
+        "Married-civ-spouse",
+        "Divorced",
+        "Married-spouse-absent",
+        "Separated",
+        "Married-AF-spouse",
+        "Widowed",
+      ];
+      let job = [
+        "Adm-clerical",
+        "Exec-managerial",
+        "Handlers-cleaners",
+        "Prof-specialty",
+        "Other-service",
+        "Sales",
+        "Craft-repair",
+        "Transport-moving",
+        "Farming-fishing",
+        "Machine-op-inspct",
+        "Tech-support",
+        "unknown",
+        "Protective-serv",
+        "Armed-Forces",
+        "Priv-house-serv",
+      ];
+      let relation = [
+        "Not-in-family",
+        "Husband",
+        "Wife",
+        "Own-child",
+        "Unmarried",
+        "Other-relative",
+      ];
+      let race = [
+        "White",
+        "Black",
+        "Asian-Pac-Islander",
+        "Amer-Indian-Eskimo",
+        "Other",
+      ];
+      function func1() {
+        let select = document.getElementById("native_country_list");
+        for (let i = 0; i < elmts.length; i++) {
+          let optn = elmts[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func2() {
+        let select = document.getElementById("education_list");
+        for (let i = 0; i < edu.length; i++) {
+          let optn = edu[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func3() {
+        let select = document.getElementById("workclass_list");
+        for (let i = 0; i < workcls.length; i++) {
+          let optn = workcls[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func4() {
+        let select = document.getElementById("marital_status_list");
+        for (let i = 0; i < ms.length; i++) {
+          let optn = ms[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func5() {
+        let select = document.getElementById("occupation_list");
+        for (let i = 0; i < job.length; i++) {
+          let optn = job[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func6() {
+        let select = document.getElementById("relationship_list");
+        for (let i = 0; i < relation.length; i++) {
+          let optn = relation[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func7() {
+        let select = document.getElementById("race_list");
+        for (let i = 0; i < race.length; i++) {
+          let optn = race[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+
+      isLoaded = new Promise((loaded) => {
+        window.onload = loaded;
+      });
+      isLoaded.then(func1);
+      isLoaded.then(func2);
+      isLoaded.then(func3);
+      isLoaded.then(func4);
+      isLoaded.then(func5);
+      isLoaded.then(func6);
+      isLoaded.then(func7);
+    </script>
+    <style>
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 30px;
+        background-color: rgb(208, 205, 248);
+      }
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 150px;
+      }
+      form div input {
+        width: 200px;
+      }
+      form div select {
+        width: 208px;
+      }
+      .btn1 {
+        margin-right: 85px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_user_data')}}" method="POST">
+        <div class="form-group">
+          <label for="age">age: </label>
+          <input type="text" id="age" name="age" placeholder="Enter age" />
+        </div>
+
+        <div class="form-group">
+          <label for="workclass">workclass:</label>
+          <select name="workclass" id="workclass_list">
+            <option value="" selected="selected">Select workclass</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fnlwgt">fnlwgt:</label>
+          <input
+            type="text"
+            id="fnlwgt"
+            name="fnlwgt"
+            placeholder="Enter fnlwgt"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="education">education:</label>
+          <select name="education" id="education_list">
+            <option value="" selected="selected">Select education</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="education_num">education_num:</label>
+          <input
+            type="text"
+            id="education_num"
+            name="education_num"
+            placeholder="Enter education_num"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="marital_status">marital_status:</label>
+          <select name="marital_status" id="marital_status_list">
+            <option value="" selected="selected">Select marital_status</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="occupation">occupation:</label>
+          <select name="occupation" id="occupation_list">
+            <option value="" selected="selected">Select occupation</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="relationship">relationship:</label>
+          <select name="relationship" id="relationship_list">
+            <option value="" selected="selected">Select relationship</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="race">race:</label>
+          <select name="race" id="race_list">
+            <option value="" selected="selected">Select race</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sex">sex:</label>
+          <input list="sexcat" id="sex" name="sex" placeholder="Select sex" />
+          <datalist id="sexcat">
+            <option value="Male"></option>
+            <option value="Female"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="capital_gain">capital_gain:</label>
+          <input
+            type="text"
+            id="capital_gain"
+            name="capital_gain"
+            placeholder="Enter capital_gain"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="capital_loss">capital_loss:</label>
+          <input
+            type="text"
+            id="capital_loss"
+            name="capital_loss"
+            placeholder="Enter capital_loss"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="hours_per_week">hours_per_week:</label>
+          <input
+            type="text"
+            id="hours_per_week"
+            name="hours_per_week"
+            placeholder="Enter hours_per_week"
+          />
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="native_country">native_country:</label>
+          <select name="native_country" id="native_country_list">
+            <option value="" selected="selected">Select native country</option>
+          </select>
+        </div>
+
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

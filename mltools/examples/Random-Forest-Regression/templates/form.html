@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 120px;
+      }
+
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 20px;
+        background-color: rgb(208, 205, 248);
+      }
+      .btn1 {
+        margin-right: 75px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_user_data')}}" method="POST">
+        <div class="form-group">
+          <label for="crim">crim:</label>
+          <input
+            type="text"
+            id="crim"
+            name="crim"
+            placeholder="per capita crime rate by town"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="zn">zn:</label>
+          <input
+            type="text"
+            id="zn"
+            name="zn"
+            placeholder="proportion of residential land zoned for lots over 25,000 sq.ft."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="indus">indus:</label>
+          <input
+            type="text"
+            id="indus"
+            name="indus"
+            placeholder="proportion of non-retail business acres per town"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="chas">chas:</label>
+          <input
+            list="chasval"
+            id="chas"
+            name="chas"
+            placeholder="1 if tract bounds river; 0 otherwise"
+          />
+          <datalist id="chasval">
+            <option value="0"></option>
+            <option value="1"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="age">age: </label>
+          <input type="text" id="age" name="age" placeholder="Enter age" />
+        </div>
+
+        <div class="form-group">
+          <label for="dis">dis:</label>
+          <input
+            type="text"
+            id="dis"
+            name="dis"
+            placeholder="weighted distances to five Boston employment centres"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="rad">rad:</label>
+          <input
+            type="text"
+            id="rad"
+            name="rad"
+            placeholder="index of accessibility to radial highways"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="b">b:</label>
+          <input
+            type="text"
+            id="b"
+            name="b"
+            placeholder="1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lstat">lstat:</label>
+          <input
+            type="text"
+            id="lstat"
+            name="lstat"
+            placeholder="% lower status of the population"
+          />
+        </div>
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: lightblue;
+      }
+
+      h1 {
+        color: rgb(86, 47, 196);
+        text-align: center;
+      }
+
+      p {
+        font-family: verdana;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .repo {
+        max-width: 200px;
+        margin: auto;
+        background-color: rgb(190, 159, 216);
+        color: white;
+        font-family: verdana;
+        font-size: 16px;
+        padding: 12px 20px;
+        margin-top: 50px;
+        text-align: center;
+        border-radius: 10px;
+        border: 2px solid rgb(184, 157, 206);
+      }
+
+      .btn {
+        max-width: 70px;
+        margin: auto;
+        font-family: verdana;
+        padding: 12px 20px;
+        margin-top: 20px;
+      }
+
+      .button {
+        background-color: #b290f1;
+        color: white;
+        padding: 6px 12px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 10%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>Classification Project</h1>
+    </div>
+    <div>
+      <p>Model: XGBoost Classifier</p>
+    </div>
+    <div class="repo">
+      <a href="https://github.com/dghorai/xgboost-classification-project">
+        View Project Repository
+      </a>
+    </div>
+    <div class="btn">
+      <a href="{{ url_for('predict_user_data') }}">
+        <button type="submit" class="button">Predict</button>
+      </a>
+    </div>
+  </body>
+</html>

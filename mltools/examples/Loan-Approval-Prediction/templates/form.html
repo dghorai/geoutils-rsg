@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      let property_area = ["Rural", "Semiurban", "Urban"];
+      let married = ["No", "Yes", "None"];
+      let dependents = ["0", "1", "2", "3+"];
+      let education = ["Graduate", "Not Graduate"];
+      let loan_amount_term = [12, 26, 60, 84, 120, 180, 240, 300, 360, 480];
+      let credit_history = [0, 1];
+      function func1() {
+        let select = document.getElementById("property_area_opt");
+        for (let i = 0; i < property_area.length; i++) {
+          let optn = property_area[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func2() {
+        let select = document.getElementById("married_opt");
+        for (let i = 0; i < married.length; i++) {
+          let optn = married[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func3() {
+        let select = document.getElementById("dependents_opt");
+        for (let i = 0; i < dependents.length; i++) {
+          let optn = dependents[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func4() {
+        let select = document.getElementById("education_opt");
+        for (let i = 0; i < education.length; i++) {
+          let optn = education[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func5() {
+        let select = document.getElementById("loan_amount_term_opt");
+        for (let i = 0; i < loan_amount_term.length; i++) {
+          let optn = loan_amount_term[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+      function func6() {
+        let select = document.getElementById("credit_history_opt");
+        for (let i = 0; i < credit_history.length; i++) {
+          let optn = credit_history[i];
+          let el = document.createElement("option");
+          el.textContent = optn;
+          el.value = optn;
+          select.appendChild(el);
+        }
+        res.innerHTML = "Elements Added";
+      }
+
+      isLoaded = new Promise((loaded) => {
+        window.onload = loaded;
+      });
+      isLoaded.then(func1);
+      isLoaded.then(func2);
+      isLoaded.then(func3);
+      isLoaded.then(func4);
+      isLoaded.then(func5);
+      isLoaded.then(func6);
+    </script>
+    <style>
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 30px;
+        background-color: rgb(208, 205, 248);
+      }
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 150px;
+      }
+      form div input {
+        width: 200px;
+      }
+      form div select {
+        width: 208px;
+      }
+      .btn1 {
+        margin-right: 85px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_user_data')}}" method="POST">
+        <div class="form-group">
+          <label for="applicant_income">Applicant Income:</label>
+          <input
+            type="text"
+            id="applicant_income"
+            name="ApplicantIncome"
+            placeholder="Enter applicant income"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="coapplicant_income">Co-applicant Income:</label>
+          <input
+            type="text"
+            id="coapplicant_income"
+            name="CoapplicantIncome"
+            placeholder="Enter coapplicant income"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="loan_amount">Loan Amount:</label>
+          <input
+            type="text"
+            id="loan_amount"
+            name="LoanAmount"
+            placeholder="Enter loan amount"
+          />
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="loan_amount_term">Loan Amount Term:</label>
+          <select name="Loan_Amount_Term" id="loan_amount_term_opt">
+            <option value="" selected="selected">
+              Select loan amount term
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="credit_history">Credit History:</label>
+          <select name="Credit_History" id="credit_history_opt">
+            <option value="" selected="selected">Select credit history</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="education">Education:</label>
+          <select name="Education" id="education_opt">
+            <option value="" selected="selected">Select education</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="dependents">Dependents:</label>
+          <select name="Dependents" id="dependents_opt">
+            <option value="" selected="selected">Select dependents</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="married">Married:</label>
+          <select name="Married" id="married_opt">
+            <option value="" selected="selected">Select married</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dropdown1">
+          <label for="property_area">Property Area:</label>
+          <select name="Property_Area" id="property_area_opt">
+            <option value="" selected="selected">Select property area</option>
+          </select>
+        </div>
+
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

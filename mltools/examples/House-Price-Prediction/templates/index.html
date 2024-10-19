@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: lightblue;
+      }
+
+      h1 {
+        color: rgb(86, 47, 196);
+        text-align: center;
+      }
+
+      p {
+        font-family: verdana;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .button {
+        background-color: #b290f1;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 10%;
+        margin-left: 900px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>House Price Prediction</h1>
+    <p>Model: Linear Regression</p>
+    <br />
+    <p>
+      Project Repository: https://github.com/dghorai83/house-price-prediction
+    </p>
+    <br />
+    <br />
+    <a href="{{ url_for('predict_datapoint') }}">
+      <button type="submit" class="button">Predict</button>
+    </a>
+  </body>
+</html>

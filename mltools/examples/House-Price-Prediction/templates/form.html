@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      form label {
+        display: inline-block;
+        margin-left: 10px;
+        color: #181527;
+        min-width: 110px;
+      }
+
+      .center-form {
+        justify-content: center;
+        display: flex;
+        margin: 100px 700px;
+        border: 2px solid rgb(48, 48, 238);
+        padding: 20px;
+        background-color: rgb(208, 205, 248);
+      }
+      .btn1 {
+        margin-right: 75px;
+      }
+      .btn2 {
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-form">
+      <form action="{{url_for('predict_datapoint')}}" method="POST">
+        <div class="form-group">
+          <label for="crim">CRIM: </label>
+          <input
+            type="text"
+            id="crim"
+            name="crim"
+            placeholder="Enter CRIM value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="zn">ZN: </label>
+          <input
+            type="text"
+            id="zn"
+            name="zn"
+            placeholder="Enter ZN value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="indus">INDUS:</label>
+          <input
+            type="text"
+            id="indus"
+            name="indus"
+            placeholder="Enter INDUS value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="chas">CHAS:</label>
+          <input
+            type="text"
+            id="chas"
+            name="chas"
+            placeholder="Enter CHAS value (int)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="nox">NOX:</label>
+          <input
+            type="text"
+            id="nox"
+            name="nox"
+            placeholder="Enter NOX value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="rm">RM:</label>
+          <input
+            type="text"
+            id="rm"
+            name="rm"
+            placeholder="Enter RM value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="age">AGE:</label>
+          <input
+            type="text"
+            id="age"
+            name="age"
+            placeholder="Enter AGE value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="dis">DIS:</label>
+          <input
+            type="text"
+            id="dis"
+            name="dis"
+            placeholder="Enter DIS value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="rad">RAD:</label>
+          <input
+            type="text"
+            id="rad"
+            name="rad"
+            placeholder="Enter RAD value (int)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="tax">TAX:</label>
+          <input
+            type="text"
+            id="tax"
+            name="tax"
+            placeholder="Enter TAX value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="ptratio">PTRATIO:</label>
+          <input
+            type="text"
+            id="ptratio"
+            name="ptratio"
+            placeholder="Enter PTRATIO value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="b">B:</label>
+          <input
+            type="text"
+            id="b"
+            name="b"
+            placeholder="Enter B value (float)"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lstat">LSTAT:</label>
+          <input
+            type="text"
+            id="lstat"
+            name="lstat"
+            placeholder="Enter LSTAT value (float)"
+          />
+        </div>
+
+        <br /><br />
+        <input class="btn1" type="submit" value="Submit" />
+        <input class="btn2" type="reset" value="Reset" />
+      </form>
+    </div>
+  </body>
+</html>

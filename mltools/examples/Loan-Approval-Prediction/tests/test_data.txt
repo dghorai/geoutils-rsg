@@ -1,0 +1,22 @@
+Test Data 1:
+	ApplicantIncome		: 3000
+	CoapplicantIncome	: 0
+	LoanAmount		: 66
+	Loan_Amount_Term	: 360
+	Credit_History		: 1
+	Education		: Graduate
+	Dependents		: 0
+	Married			: Yes
+	Property_Area		: Urban
+
+
+Test Data 2:
+	ApplicantIncome		: 3510
+	CoapplicantIncome	: 0
+	LoanAmount		: 76
+	Loan_Amount_Term	: 360
+	Credit_History		: 0
+	Education		: Graduate
+	Dependents		: 0
+	Married			: No
+	Property_Area		: Urban
