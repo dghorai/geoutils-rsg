@@ -137,3 +137,4 @@ rsgtools/raster_ops/__pycache__
 rsgtools/vector_ops/__pycache__
 tests/__pycache__
 tests/results/*
+research/*
