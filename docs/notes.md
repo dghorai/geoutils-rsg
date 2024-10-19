@@ -58,3 +58,13 @@
     - Add Reviewers (from left side) from revieweres list
     - Reviewer will review the correction and will do the 'Merge pull request'
     - Finally, reviewer will close it by clicking on 'Close pull request'
+  - Setup Local Repo
+    - `git init`
+    - `git branch -M main`
+    - `git add README.md`
+    - `git commit -m "first commit"`
+    - `git remote add origin https://github.com/dghorai/github-repo-name.git'
+    - `git push -u origin main`
+  - Setup Remote Branch to Track
+    - `git branch --set-upstream-to=origin/main main`
+    - `git pull origin master --allow-unrelated-histories`
